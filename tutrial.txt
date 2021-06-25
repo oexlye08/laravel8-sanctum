@@ -1,0 +1,21 @@
+1. create new proect "laravel new nama_project"
+2. setting .env
+3. create model, controller, migration
+4. php artisan migrate
+5. install sanctum "composer require laravel/sanctum"
+6. vendor publish "php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" "
+7. php artisan migrate
+8. add sanctum middleware to api in file "app/Http/Kernel.php"
+        'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+9. To begin issuing tokens for users, your "User model" should use the Laravel\Sanctum\HasApiTokens trait:
+    use Laravel\Sanctum\HasApiTokens;
+
+    class User extends Authenticatable
+    {
+        use HasApiTokens, HasFactory, Notifiable;
+    }
+10. set routing middleware
